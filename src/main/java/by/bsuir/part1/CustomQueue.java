@@ -9,66 +9,54 @@ public class CustomQueue {
 
     int size;
 
-    public CustomQueue()
+    public CustomQueue() {
 
-
-    {
-
-         this.head = current = new Node(null);
-         this.size = 0;
-         this.head.next = this.head;
+        this.head = current = new Node(null,null);
+        this.size = 0;
+        this.head.next = this.head;
 
     }
 
 
+    public void index(int index) throws Exception {
+        if (index < -1 || index > size - 1) {
+            throw new Exception("Invalid parameter");
 
-    public void index(int index) throws Exception
-
-
-    {
-         if (index < -1 || index > size - 1)
-         {
-         throw new Exception("Invalid parameter");
-
-    }
+        }
 
 
         if (index == -1)
-             return;
-         current = head.next;
-         int j = 0;
-         while (current != head && j < index)
-         {
-         current = current.next;
-         j++;
+            return;
+        current = head.next;
+        int j = 0;
+        while (current != head && j < index) {
+            current = current.next;
+            j++;
 
-    }
+        }
 
 
     }
 
     public void delete(int index) throws Exception {
-         if (isEmpty())
-             {
+        if (isEmpty()) {
             throw new Exception("List is empty and can not be deleted");
 
         }
-         if (index < 0 || index > size)
-            {
+        if (index < 0 || index > size) {
             throw new Exception("Invalid parameter");
 
         }
-         index(index - 1);
-         current.setNext(current.next.next);
-         size--;
+        index(index - 1);
+        current.setNext(current.next.next);
+        size--;
 
     }
 
 
-    public Object get(int index){
-         if (index < -1 || index > size - 1)
-             {
-                 System.out.println("Invalid parameter");
+    public Object get(int index) {
+        if (index < -1 || index > size - 1) {
+            System.out.println("Invalid parameter");
 
         }
         try {
@@ -82,16 +70,13 @@ public class CustomQueue {
     }
 
 
-
-
     public void insert(int index, Object obj) throws Exception {
 
-         if (index < 0 || index > size)
-            {
-             throw new Exception("Invalid parameter");
+        if (index < 0 || index > size) {
+            throw new Exception("Invalid parameter");
 
         }
-         index(index - 1);
+        index(index - 1);
         current.setNext(new Node(obj, current.next));
         size++;
     }

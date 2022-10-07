@@ -3,11 +3,12 @@ package by.bsuir.part1;
 public class Node {
 
     Node next;
-   // String value;
+    String value;
 
 
-    public Node(Node next) {
+    public Node(Node next, String st) {
         this.next = next;
+        this.value = st;
 
     }
 
