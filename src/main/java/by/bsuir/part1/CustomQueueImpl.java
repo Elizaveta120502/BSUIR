@@ -34,7 +34,7 @@ public class CustomQueueImpl<E> implements CustomQueue<E> {
     }
 
     @Override
-    public E pop() {
+    public  E pop() {
         Node<E> last = rear;
         if (last == null){
             throw new NoSuchElementException("Rear element is null");
@@ -54,23 +54,23 @@ public class CustomQueueImpl<E> implements CustomQueue<E> {
     }
 
 
-    private class Node<E> {
+    private class Node<T> {
 
-        Node<E> next;
+        Node<T> next;
 
-        E value;
+        T value;
 
 
-        public Node(Node<E> next, E value) {
+        public Node(Node<T> next, T value) {
             this.next = next;
             this.value = value;
         }
 
-        public Node<E> getNext() {
+        public Node<T> getNext() {
             return next;
         }
 
-        public E getValue() {
+        public T getValue() {
             return value;
         }
     }
