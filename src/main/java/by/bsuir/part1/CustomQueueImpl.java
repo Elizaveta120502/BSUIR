@@ -6,9 +6,9 @@ import java.util.NoSuchElementException;
 public class CustomQueueImpl<E> implements CustomQueue<E> {
 
 
-    private Node front;
+    private Node<E> front;
 
-    private Node rear;
+    private Node<E> rear;
 
     private int size;
 
