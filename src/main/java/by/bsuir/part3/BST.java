@@ -7,15 +7,15 @@ public class BST<Key extends Comparable<Key>,Value> {
 
     private class Node {
         private Key key;
-        private Value Val;
+        private Value val;
         private Node left;
         private Node right;
-        private int N;
+        private int n;
 
         public Node(Key key, Value val, int n) {
             this.key = key;
-            Val = val;
-            N = n;
+            this.val = val;
+            this.n = n;
         }
 
         public int size() {
@@ -26,7 +26,7 @@ public class BST<Key extends Comparable<Key>,Value> {
             if (x == null) {
                 return 0;
             } else {
-                return x.N;
+                return x.n;
             }
 
         }
@@ -36,13 +36,13 @@ public class BST<Key extends Comparable<Key>,Value> {
             while (x != null) {
                 int cmp = key.compareTo(x.key);
                 if (cmp == 0) {
-                    return x.Val;
+                    return x.val;
                 }
                 else if (cmp < 0) x = x.left;
                 else if (cmp > 0) x = x.right;
 
             }
-            return x.Val;
+            return x.val;
         }
 
         public Node put(Node x,Key key, Value val){
@@ -51,8 +51,8 @@ public class BST<Key extends Comparable<Key>,Value> {
                 int cmp = key.compareTo(x.key);
                 if      (cmp < 0) x.left  = put(x.left,  key, val);
                 else if (cmp > 0) x.right = put(x.right, key, val);
-                else              x.Val   = val;
-                x.N = 1 + size(x.left) + size(x.right);
+                else              x.val = val;
+                x.n = 1 + size(x.left) + size(x.right);
                 return x;
 
         }

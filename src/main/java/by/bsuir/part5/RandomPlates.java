@@ -1,5 +1,10 @@
 package by.bsuir.part5;
 
+import by.bsuir.part2.Main;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Random;
 import java.util.Scanner;
 
 public class RandomPlates {
@@ -10,31 +15,34 @@ public class RandomPlates {
     private static final int START_OF_LETTER_AMOUNT = 65;
     private static final int END_OF_LETTER_AMOUNT = 90;
 
+    private static final Logger LOGGER = LogManager.getLogger(RandomPlates.class);
+
 
     public static void main (String[] args){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter N value. It is amount of plates.\n N = ");
+        LOGGER.info("Enter N value. It is amount of plates.\n N = ");
         int N = 0;
         if (sc.hasNext()){
             N = sc.nextInt();
         }
         for (String s : createRandomPlates(N)){
-            System.out.println(s);
+            LOGGER.info(s);
         }
 
 
     }
 
-    private static String[] createRandomPlates(int N){
+    private static String[] createRandomPlates(int n){
         String st;
-        String[] plates = new String[N];
+        String[] plates = new String[n];
         String firstLetter;
         String secondLetter;
 
         int firstPart = 0;
-        int lastNumber = (int)Math.random()*7 +1;
-        for (int i=0; i < N; i++){
-             firstPart = (int) (Math.random()*9999) + 1000;
+        Random r = new Random();
+        int lastNumber = r.nextInt(7) + 1;
+        for (int i=0; i < n; i++){
+             firstPart = r.nextInt(9999)+1000;
              firstLetter= generateLetter();
              secondLetter = generateLetter();
             st = String.valueOf(firstPart);

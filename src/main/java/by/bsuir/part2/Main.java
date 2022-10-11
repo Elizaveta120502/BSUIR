@@ -1,6 +1,9 @@
 package by.bsuir.part2;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.*;
 
 
@@ -9,11 +12,12 @@ import java.util.*;
 слова, состоящие из двух слов.*/
 
 public class Main {
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
     public static void main(String [] args){
         String pattern;
 
 
-        System.out.println("Enter words list");
+        LOGGER.info("Enter word list");
         Scanner sc = new Scanner(System.in);
 
         ArrayList<String> list = new ArrayList<>();
@@ -36,7 +40,7 @@ public class Main {
 
         for (int i =0 ; i < list.size(); i ++) {
             for (int j = 0; j < sublist.size(); j++) {
-                List<Integer> foundIndexes = KMPSearch(list.get(i), sublist.get(j));
+                List<Integer> foundIndexes = KmpSearch(list.get(i), sublist.get(j));
                 if (list.get(i).equals(sublist.get(j))) {
                     break;
                 }
@@ -50,7 +54,7 @@ public class Main {
 
         for (int i =0 ; i < list.size(); i ++) {
             for (int j = 0; j < sublist.size(); j++) {
-                List<Integer> foundIndexes = KMPSearch(list.get(j), sublist.get(i));
+                List<Integer> foundIndexes = KmpSearch(list.get(j), sublist.get(i));
                 if (list.get(i).equals(sublist.get(j))) {
                     break;
                 }
@@ -70,7 +74,7 @@ public class Main {
             }
         }
         for (String s : finalList) {
-            System.out.println(s);
+            LOGGER.info(s);
         }
 
 
@@ -105,7 +109,7 @@ public class Main {
     }
 
 
-    public static List<Integer> KMPSearch (String text, String pattern){
+    public static List<Integer> KmpSearch(String text, String pattern){
         int[] compliedPatternArray = compilePatternArray(pattern);
 
         int textIndex = 0;
