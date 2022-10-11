@@ -1,13 +1,13 @@
 package by.bsuir.part1;
 
 
-public interface CustomQueue<Integer> {
+public interface CustomQueue<E> {
 
-    void push(CustomQueueImpl.Node node);
+    void push(E e);
 
-    void pop();
+    E pop();
 
-    boolean isFull();
+    int size();
 
     boolean isEmpty();
 

@@ -3,7 +3,7 @@ package by.bsuir.part1;
 
 import java.util.NoSuchElementException;
 
-public class CustomQueueImpl implements CustomQueue<Integer> {
+public class CustomQueueImpl<E> implements CustomQueue<E> {
 
 
     private Node front;
@@ -12,44 +12,37 @@ public class CustomQueueImpl implements CustomQueue<Integer> {
 
     private int size;
 
-    private Node items[];
 
     public CustomQueueImpl(int sizeValue) {
         this.size = sizeValue;
         this.front = null;
         this.rear = null;
-        this.items = new Node[this.size];
 
-    }
-
-    public CustomQueueImpl() {
     }
 
 
     @Override
-    public void push(Node node) {
-        if (this.isFull()) {
-            throw new NoSuchElementException();
+    public void push(E val) {
+        Node<E> first = front;
+        Node<E> newNode = new Node<>(first, val);
+        first = newNode;
+         if (first == null){
+             rear = newNode;
+         }
+         size++;
+
+    }
+
+    @Override
+    public E pop() {
+        Node<E> last = rear;
+        if (last == null){
+            throw new NoSuchElementException("Rear element is null");
         }
-        this.rear.next = node;
-        this.items[this.size] = node;
 
+        return unlinkLastElement(last);
     }
 
-    @Override
-    public void pop() {
-        if (this.isEmpty()) {
-            throw new NoSuchElementException();
-        }
-        this.front = front.next;
-        this.size = size - 1;
-
-    }
-
-    @Override
-    public boolean isFull() {
-        return this.size() == (this.size - 1);
-    }
 
     public boolean isEmpty() {
         return this.front == this.rear;
@@ -57,42 +50,40 @@ public class CustomQueueImpl implements CustomQueue<Integer> {
     }
 
     public int size() {
-        return (this.rear.getValue() + this.size - this.front.getValue()) % this.size;
+        return size;
     }
 
 
+    private class Node<E> {
 
-    public class Node {
+        Node<E> next;
 
-        Node next;
-
-        Integer value;
+        E value;
 
 
-        public Node(Node next, Integer value) {
+        public Node(Node<E> next, E value) {
             this.next = next;
             this.value = value;
         }
 
-        public Node(Integer value) {
-            this.value = value;
-        }
-
-
-        public Node() {
-        }
-
-        public Node getNext() {
+        public Node<E> getNext() {
             return next;
         }
 
-        public Integer getValue() {
+        public E getValue() {
             return value;
         }
-
-
     }
 
+
+    private E unlinkLastElement(Node<E> last){
+
+        E element = last.value;
+        last.value = null;
+        size --;
+        return element;
+
+    }
 
 
 }
