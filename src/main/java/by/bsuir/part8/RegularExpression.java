@@ -18,7 +18,7 @@ public class RegularExpression {
         final String REGEX_1 = ".*[1]{3,}.*";
         final String REGEX_2 = ".*(110).*";
         final String REGEX_3 = ".*(1101100).*";
-        final String REGEX_4 = "^((?!110).)*";
+        final String REGEX_4 = "^((?!110).)*?";
 
 
 

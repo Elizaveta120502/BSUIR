@@ -17,6 +17,7 @@ public class Main {
         String pattern;
 
 
+
         LOGGER.info("Enter word list");
         Scanner sc = new Scanner(System.in);
 
@@ -34,8 +35,6 @@ public class Main {
             list.add(pattern);
             sublist.add(pattern);
         }
-
-
 
 
         for (int i =0 ; i < list.size(); i ++) {
@@ -65,15 +64,17 @@ public class Main {
 
         }
 
-
-        for (int i =0; i < finalList.size(); i ++){
+              list.removeAll(list);
+        for (int i =0; i < finalList.size();i++){
             for (int j=i+1; j < finalList.size();j++){
                 if(finalList.get(i).equals(finalList.get(j))){
-                    finalList.remove(finalList.get(j));
+                    list.add(finalList.get(j));
                 }
             }
         }
-        for (String s : finalList) {
+
+
+        for (String s : list) {
             LOGGER.info(s);
         }
 
@@ -115,6 +116,7 @@ public class Main {
         int textIndex = 0;
         int patternIndex = 0;
 
+
         List<Integer> foundIndexes = new ArrayList<>();
 
         while (textIndex < text.length()) {
@@ -123,7 +125,7 @@ public class Main {
                 textIndex++;
             }
             if (patternIndex == pattern.length()) {
-                foundIndexes.add(textIndex - patternIndex);
+                    foundIndexes.add(textIndex - patternIndex);
                 patternIndex = compliedPatternArray[patternIndex - 1];
             }
 
@@ -134,6 +136,7 @@ public class Main {
                     textIndex = textIndex + 1;
             }
         }
+
         return foundIndexes;
     }
 

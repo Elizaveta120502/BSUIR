@@ -18,9 +18,6 @@ public class BST<Key extends Comparable<Key>,Value> {
             this.n = n;
         }
 
-        public int size() {
-            return size(root);
-        }
 
         private int size(Node x) {
             if (x == null) {
@@ -31,31 +28,37 @@ public class BST<Key extends Comparable<Key>,Value> {
 
         }
 
-        public Value get(Key key) {
-            Node x = root;
-            while (x != null) {
-                int cmp = key.compareTo(x.key);
-                if (cmp == 0) {
-                    return x.val;
-                }
-                else if (cmp < 0) x = x.left;
-                else if (cmp > 0) x = x.right;
 
+    }
+
+    public int size(Node node) {
+        return node.size(node);
+    }
+
+    public Value get(Key key) {
+        Node x = root;
+        while (x != null) {
+            int cmp = key.compareTo(x.key);
+            if (cmp == 0) {
+                return x.val;
             }
-            return x.val;
-        }
-
-        public Node put(Node x,Key key, Value val){
-
-                if (x == null) return new Node(key, val, 1);
-                int cmp = key.compareTo(x.key);
-                if      (cmp < 0) x.left  = put(x.left,  key, val);
-                else if (cmp > 0) x.right = put(x.right, key, val);
-                else              x.val = val;
-                x.n = 1 + size(x.left) + size(x.right);
-                return x;
+            else if (cmp < 0) x = x.left;
+            else if (cmp > 0) x = x.right;
 
         }
-        }
+        return x.val;
+    }
+
+    public Node put(Node x,Key key, Value val){
+
+        if (x == null) return new Node(key, val, 1);
+        int cmp = key.compareTo(x.key);
+        if      (cmp < 0) x.left  = put(x.left,  key, val);
+        else if (cmp > 0) x.right = put(x.right, key, val);
+        else              x.val = val;
+        x.n = 1 + size(x.left) + size(x.right);
+        return x;
+
+    }
 
 }

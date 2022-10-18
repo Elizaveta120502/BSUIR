@@ -15,6 +15,16 @@ public class RandomPlates {
     private static final int START_OF_LETTER_AMOUNT = 65;
     private static final int END_OF_LETTER_AMOUNT = 90;
 
+
+    private static int MIN_RANDOM_NUMBER = 1;
+    private static int MAX_RANDOM_NUMBER = 7;
+    private static int DIFF = MAX_RANDOM_NUMBER - MIN_RANDOM_NUMBER;
+
+    private static int MIN_RANDOM_NUMBER_BIG = 1000;
+    private static int MAX_RANDOM_NUMBER_BIG = 9999;
+
+
+
     private static final Logger LOGGER = LogManager.getLogger(RandomPlates.class);
 
 
@@ -38,11 +48,15 @@ public class RandomPlates {
         String firstLetter;
         String secondLetter;
 
-        int firstPart = 0;
+        int firstPart;
+        int lastNumber;
         Random r = new Random();
-        int lastNumber = r.nextInt(7) + 1;
+
         for (int i=0; i < n; i++){
-             firstPart = r.nextInt(9999)+1000;
+            lastNumber = r.nextInt(DIFF+1);
+            lastNumber+=MIN_RANDOM_NUMBER;
+            firstPart = r.nextInt((MAX_RANDOM_NUMBER_BIG - MIN_RANDOM_NUMBER_BIG) + 1);
+             firstPart+=MIN_RANDOM_NUMBER_BIG;
              firstLetter= generateLetter();
              secondLetter = generateLetter();
             st = String.valueOf(firstPart);
@@ -59,7 +73,9 @@ public class RandomPlates {
 
 
     private static String generateLetter(){
-        int index = (int)Math.random()*END_OF_LETTER_AMOUNT + START_OF_LETTER_AMOUNT;
+        Random rand = new Random();
+        int index = rand.nextInt((END_OF_LETTER_AMOUNT - START_OF_LETTER_AMOUNT) + 1);
+        index+=START_OF_LETTER_AMOUNT;
         char c = (char) index;
         return String.valueOf(c);
 

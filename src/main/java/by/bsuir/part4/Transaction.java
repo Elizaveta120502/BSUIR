@@ -20,7 +20,7 @@ public class Transaction {
         this.hash = hash;
     }
 
-    public int hashCode(){
+    private int customHashCode(){
         hash = 17;
         hash = 31 * hash + who.hashCode();
         hash = 31 * hash + when.hashCode();
