@@ -2,7 +2,7 @@ package by.bsuir.part3;
 // написать реализации методов put() и get()
 // для класса Дерева Бинарного Поиска (BST)
 
-public class BST<Key extends Comparable<Key>,Value> {
+public class BST<Key extends Comparable<Key>, Value> {
     private Node root;
 
     private class Node {
@@ -28,7 +28,25 @@ public class BST<Key extends Comparable<Key>,Value> {
 
         }
 
+        public Key getKey() {
+            return key;
+        }
 
+        public Value getVal() {
+            return val;
+        }
+
+        public Node getLeft() {
+            return left;
+        }
+
+        public Node getRight() {
+            return right;
+        }
+
+        public int getN() {
+            return n;
+        }
     }
 
     public int size(Node node) {
@@ -41,21 +59,29 @@ public class BST<Key extends Comparable<Key>,Value> {
             int cmp = key.compareTo(x.key);
             if (cmp == 0) {
                 return x.val;
-            }
-            else if (cmp < 0) x = x.left;
+            } else if (cmp < 0) x = x.left;
             else if (cmp > 0) x = x.right;
 
         }
         return x.val;
     }
 
-    public Node put(Node x,Key key, Value val){
+    public Node put(Node x, Key key, Value val) {
 
-        if (x == null) return new Node(key, val, 1);
+
+        if (x == null) {
+            return new Node(key, val, 1);
+        }
+
         int cmp = key.compareTo(x.key);
-        if      (cmp < 0) x.left  = put(x.left,  key, val);
-        else if (cmp > 0) x.right = put(x.right, key, val);
-        else              x.val = val;
+
+        if (cmp < 0) {
+            x.left = new Node(key, val, 1);
+        } else if (cmp > 0) {
+            x.right = new Node(key, val, 1);
+        } else {
+            x.val = val;
+        }
         x.n = 1 + size(x.left) + size(x.right);
         return x;
 

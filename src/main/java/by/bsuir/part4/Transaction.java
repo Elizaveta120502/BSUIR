@@ -9,7 +9,7 @@ public class Transaction {
     private final Date when;
     private final double amount;
 
-    private  int hash;
+    private  Integer hash;
 
 
 
@@ -20,7 +20,7 @@ public class Transaction {
         this.hash = hash;
     }
 
-    private int customHashCode(){
+    private Integer customHashCode(){
         hash = 17;
         hash = 31 * hash + who.hashCode();
         hash = 31 * hash + when.hashCode();
